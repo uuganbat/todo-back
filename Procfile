@@ -1,4 +1,7 @@
 release: python manage.py migrate
-release: python manage.py createsuperuser --username admin --password admin
+heroku config:set DJANGO_SUPERUSER_USERNAME=admin
+heroku config:set DJANGO_SUPERUSER_PASSWORD=admin
+heroku config:set DJANGO_SUPERUSER_EMAIL=admin@monos.mn
+release: python manage.py createsuperuser --noinput
 web: gunicorn app.wsgi
 heroku config:set DEBUG_COLLECTSTATIC=1
