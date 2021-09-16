@@ -2,7 +2,7 @@ from .common import *
 import dj_database_url
 
 DEBUG = False
-ALLOWED_HOSTS = ["https://todo-uit.heroku.com"]
+ALLOWED_HOSTS = ["https://todo-uit.herokuapp.com", "localhost", "0.0.0.0"]
 
 DATABASES = {
     "default": {
