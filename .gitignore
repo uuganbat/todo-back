@@ -1,6 +1,6 @@
-db.sqlite3
 .vscode/
 env/
 static/
 staticfiles/
 *.pyc
+db.sqlite3
