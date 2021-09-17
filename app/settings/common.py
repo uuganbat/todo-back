@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     ################################
     "src.api.apps.APIConfig",
     "src.todo.apps.TodoConfig",
+    "src.ui.apps.UIConfig",
 ]
 
 MIDDLEWARE = [
