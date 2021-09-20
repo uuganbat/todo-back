@@ -9,6 +9,7 @@ from django.shortcuts import get_object_or_404
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -18,7 +19,25 @@ from src.todo.models import Task
 
 
 class LoginAPI(ObtainAuthToken):
-    pass
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(
+            data=request.data, context={"request": request}
+        )
+        if serializer.is_valid():
+            user = serializer.validated_data["user"]
+            token, created = Token.objects.get_or_create(user=user)
+            return Response(
+                {
+                    "status": "success",
+                    "token": token.key,
+                    "user_id": user.pk,
+                    "email": user.email,
+                }
+            )
+        else:
+            return Response(
+                {"status": "error", "message": "Username or password is incorrect"}
+            )
 
 
 class TaskListAPI(APIView):
